@@ -1,0 +1,21 @@
+
+r	java:S106#"+Replace this use of System.out by a logger.(¿Â±½úÿÿÿÿ8ÚÉæÔş2J$4fc7f415-9cc3-493a-8ed7-2ca7353e9128
+r	java:S1061"+Replace this use of System.err by a logger.(È÷ä¨ÿÿÿÿÿ8ßÉæÔş2J$e01b3f78-8c79-4ba8-897e-80ca1bbcffac
+r	java:S106:"+Replace this use of System.out by a logger.(¨°‹¤úÿÿÿÿ8áÉæÔş2J$8981008c-3a66-47de-aa36-eed9bf19f16f
+r	java:S106B"+Replace this use of System.out by a logger.(Š†¨Šşÿÿÿÿ8áÉæÔş2J$f100f0d2-9ae7-4fb1-93b3-9092284810f9
+r	java:S106O"+Replace this use of System.out by a logger.(Úï•øÿÿÿÿ8ïÉæÔş2J$6f971152-983f-4c6c-b093-819240761c41
+z
+java:S1135N"2Complete the task associated to this TODO comment.(•éòûÿÿÿÿ8ú´ïÔş2J$585e6222-92c5-451f-9c31-7f2f79606b40
+m	java:S106Q"+Replace this use of System.out by a logger.(Óµàù8ïÉæÔş2J$e1788c0c-0f40-420a-986b-139c3eabbe75
+m	java:S106T"+Replace this use of System.err by a logger.(ûáÃş8ïÉæÔş2J$191d8a13-acc5-4d0a-9b03-73bdfdf264d5
+r	java:S106b"+Replace this use of System.out by a logger.(›¾ıøÿÿÿÿ8ÊæÔş2J$c7337c68-b6d0-4089-b0dc-4aa444bdfa03
+r	java:S106d"+Replace this use of System.err by a logger.(ıÊ‹ÿÿÿÿÿ8ÊæÔş2J$c2a824c6-3766-4da3-8f52-038815a58a1f
+r	java:S106m"+Replace this use of System.out by a logger.(Ğ–­¬úÿÿÿÿ8ƒÊæÔş2J$7d971f08-b6b7-4b60-863a-f65dcdfdbc4c
+r	java:S106u"+Replace this use of System.out by a logger.(´©òÓùÿÿÿÿ8ƒÊæÔş2J$10244328-25d5-46e5-b74d-9d45fd1b4a2f
+s	java:S106„"+Replace this use of System.out by a logger.(òşÚúøÿÿÿÿ8ÊæÔş2J$4725a797-7dd5-4411-af13-52f38d7e6394
+n	java:S106†"+Replace this use of System.err by a logger.(Ùæ­…8ÊæÔş2J$8b69b4c1-78a1-4925-8599-f29ceb3c8637
+s	java:S106–"+Replace this use of System.out by a logger.(ˆ¦Œåøÿÿÿÿ8ÊæÔş2J$034f7395-8c45-4da8-ac5b-57883a637506
+n	java:S106˜"+Replace this use of System.err by a logger.(¿ÅÅÇ8’ÊæÔş2J$bc41a973-aa70-4fa6-ac45-27932e5ccac1
+n	java:S106¤"+Replace this use of System.out by a logger.(íá§†8’ÊæÔş2J$40390c65-ee53-44b6-b42c-16ed4de1a850
+‚
+java:S1128":Remove this unused import 'java.util.concurrent.Callable'.(¾×¶îûÿÿÿÿ8ÊæÔş2J$7e19be45-9ae3-402b-ac57-b64eaf10ba30
