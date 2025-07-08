@@ -68,3 +68,5 @@ G.idea/sonarlint/issuestore/a/5/a5cc2925ca8258af241be7e5b0381edf30266302,e\d\ed
 Q.idea/sonarlint/securityhotspotstore/a/5/a5cc2925ca8258af241be7e5b0381edf30266302,3\0\30205a209c6ce77c4cfc19a09e6f57c588b7fb88
 Å
 Q.idea/sonarlint/securityhotspotstore/8/a/8a24cf66545de60a69e14b283d6ba242b92b9ccf,f\2\f2e601a3a937ef2c9781e35178ad16407b5522d0
+I
+examples/conditionals.jpl,f\e\fe69cf49041342420375f58a0ac7e61ab7e9b66b

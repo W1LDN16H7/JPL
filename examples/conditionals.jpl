@@ -1,0 +1,10 @@
+[
+  { "let": { "x": 5 } },
+  { "let": { "y": 10 } },
+  { "print": { "lt": ["x", "y"] } },
+  { "print": { "eq": ["x", 5] } },
+  { "print": { "gt": ["x", "y"] } },
+  { "print": { "and": [true, { "lt": ["x", "y"] }] } },
+  { "print": { "or": [false, { "eq": ["y", 10] }] } },
+  { "print": { "not": [true] } }
+]
