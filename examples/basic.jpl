@@ -1,5 +1,11 @@
 [
+// can use import,bring,laao
+ { "import": "system.jpl" },
 
+//system lib
+  { "print": { "call": { "now": [] } } },
+  { "print": { "call": { "osName": [] } } },
+  { "print": { "call": { "cpuCount": [] } } },
   // Define a function to square a number
   {
     "def": {

@@ -51,6 +51,7 @@ public class JPLContext {
             return variables.getOrDefault(text, text);
         } else if (node.isNumber()) {
             return node.numberValue();
+
         } else if (node.isBoolean()) {
             return node.booleanValue();
 
@@ -96,6 +97,10 @@ public class JPLContext {
             if (node.has("||")) return resolveLogic(node.get("||"), "||");
             if (node.has("not")) return resolveLogic(node.get("not"), "not");
             if (node.has("!")) return resolveLogic(node.get("!"), "!");
+            if (node.has("native")) {
+                String expr = node.get("native").asText();
+                return evaluateNative(expr);
+            }
 
             throw new JPLException("Unknown expression: " + node);
         }
@@ -288,6 +293,77 @@ public class JPLContext {
         }
         return functions.get(name);
     }
+
+private Object evaluateNative(String expr) {
+    try {
+        switch (expr) {
+
+            // 🕒 Time & Date
+            case "java.time.LocalDateTime.now()":
+                return java.time.LocalDateTime.now().toString();
+            case "java.time.LocalDate.now()":
+                return java.time.LocalDate.now().toString();
+            case "java.time.Instant.now()":
+                return java.time.Instant.now().toString();
+            case "System.currentTimeMillis()":
+                return System.currentTimeMillis();
+            case "System.nanoTime()":
+                return System.nanoTime();
+
+            // 🖥️ System Info
+            case "os.name":
+                return System.getProperty("os.name");
+            case "os.arch":
+                return System.getProperty("os.arch");
+            case "os.version":
+                return System.getProperty("os.version");
+            case "java.version":
+                return System.getProperty("java.version");
+            case "java.vendor":
+                return System.getProperty("java.vendor");
+            case "user.name":
+                return System.getProperty("user.name");
+            case "user.home":
+                return System.getProperty("user.home");
+            case "user.dir":
+                return System.getProperty("user.dir");
+
+            // 🧠 Runtime Info
+            case "Runtime.maxMemory":
+                return Runtime.getRuntime().maxMemory();
+            case "Runtime.totalMemory":
+                return Runtime.getRuntime().totalMemory();
+            case "Runtime.freeMemory":
+                return Runtime.getRuntime().freeMemory();
+            case "Runtime.availableProcessors":
+                return Runtime.getRuntime().availableProcessors();
+
+            // 📦 Environment Variables (example ones)
+            case "env.JAVA_HOME":
+                return System.getenv("JAVA_HOME");
+            case "env.PATH":
+                return System.getenv("PATH");
+            case "env.USER":
+                return System.getenv("USER");
+            case "env.HOME":
+                return System.getenv("HOME");
+            case "env.USERNAME":
+                return System.getenv("USERNAME");
+
+            default:
+                // Dynamic support for "env.KEY"
+                if (expr.startsWith("env.")) {
+                    String key = expr.substring("env.".length());
+                    return System.getenv(key);
+                }
+
+                throw new JPLException("Unsupported native expression: " + expr);
+        }
+    } catch (Exception e) {
+        throw new JPLException("Native call failed: " + expr + " → " + e.getMessage());
+    }
+}
+
 
 
 }

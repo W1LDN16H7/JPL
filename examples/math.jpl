@@ -3,5 +3,5 @@
 
   { "print": { "call": { "now": [] } } },
   { "print": { "call": { "osName": [] } } },
-  { "print": { "call": { "cpuCount": [] } } },
+  { "print": { "call": { "cpuCount": [] } } }
 ]
