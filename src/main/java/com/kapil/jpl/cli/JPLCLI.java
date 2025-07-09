@@ -6,9 +6,12 @@ import com.kapil.jpl.core.JPLInterpreter;
 import picocli.CommandLine;
 import picocli.CommandLine.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 @Command(
         name = "jpl",
@@ -40,6 +43,7 @@ public class JPLCLI implements Runnable {
      */
     public static void main(String[] args) {
         int exitCode = new CommandLine(new JPLCLI()).execute(args);
+
         System.exit(exitCode);
     }
 
@@ -49,7 +53,8 @@ public class JPLCLI implements Runnable {
      */
     @Override
     public void run() {
-        System.out.println("Use `jpl help` to see available commands.");
+        REPL repl = new REPL(new JPLInterpreter());
+        repl.start();
     }
 
     /**
@@ -107,18 +112,66 @@ public class JPLCLI implements Runnable {
         }
     }
 
-    /**
-     * Command to display help information for the CLI.
-     */
-    @Command(name = "help", description = "Display help info")
+    @Command(name = "help", description = "Display help info or examples by topic")
     static class HelpCommand implements Runnable {
-        /**
-         * Displays usage information for the CLI and its commands.
-         */
+
+        @Parameters(index = "0", paramLabel = "TOPIC", description = "Optional topic like 'if', 'loop', 'math', etc.")
+        String topic;
+
         @Override
         public void run() {
-            new CommandLine(new JPLCLI()).usage(System.out);
+            if (topic == null) {
+                // Show general usage if no topic given
+                new CommandLine(new JPLCLI()).usage(System.out);
+            } else {
+                // Try loading example file from resources
+                try {
+                    printHelpExample(topic);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
+
+        private void printHelpExample(String topic) throws IOException {
+            Path path = Path.of("src/main/java/com/kapil/jpl/examples/"+topic+".jpl");
+            String topicData;
+            Class clazz = JPLCLI.class;
+
+
+            InputStream inputStream = clazz.getResourceAsStream(path.toString());
+            String is = readFromInputStream(inputStream);
+            System.out.println("Searching for examples for topic: " + topic);
+            System.out.println("InputStream content: " + is);
+
+            if (is == null || is.isBlank()) {
+                System.out.println("No examples found for topic: " + topic);
+                return;
+            }
+            if (is.contains(topic)) {
+                topicData = is.substring(is.indexOf(topic));
+                topicData = topicData.substring(0, topicData.indexOf("\n\n"));
+                System.out.println("Example for topic '" + topic + "':\n" + topicData);
+            } else {
+                System.out.println("No examples found for topic: " + topic);
+            }
+
+
+
+        }
+    }
+
+    private static String readFromInputStream(InputStream inputStream)
+            throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br
+                     = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
     }
 
     /**
@@ -238,12 +291,14 @@ public class JPLCLI implements Runnable {
      */
     @Command(name = "compile", description = "Compile and save output to file (not yet implemented)")
     static class CompileCommand implements Runnable {
+        @Parameters(index = "0", description = "Command to compile JPL program", arity = "1")
+        private String file;
         /**
          * Placeholder for compile functionality. Prints a coming soon message.
          */
         @Override
         public void run() {
-            System.out.println("Compile feature coming soon...");
+            System.out.println("Compile feature coming soon...,We need your help to implement this feature!");
         }
     }
 
@@ -332,4 +387,6 @@ public class JPLCLI implements Runnable {
             System.out.println("(EXPLAIN) This feature will analyze and explain the logic of the JPL file.");
         }
     }
+
+
 }

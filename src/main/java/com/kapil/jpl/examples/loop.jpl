@@ -1,0 +1,46 @@
+[
+  { "print": "Starting simple loop with if..." },
+
+  {
+    "for": {
+      "var": "i",
+      "from": 1,
+      "to": 5,
+      "step": 1,
+      "do": [
+        {
+          "if": {
+            "cond": { "eq": ["i", 3] },
+            "then": { "print": "i is THREE" },
+            "else": { "print": { "add": ["i is ", "i"] } }
+          }
+        }
+      ]
+    }
+  },
+
+   { "print": "=== WHILE LOOP ===" },
+    { "let": { "i": 0 } },
+
+    {
+      "while": { "lt": ["i", 3] },
+      "do": [
+        { "print": { "add": ["while i = ", "i"] } },
+        { "let": { "i": { "add": ["i", 1] } } }
+      ]
+    },
+
+    { "print": "=== DO-WHILE LOOP ===" },
+    { "let": { "j": 0 } },
+
+    {
+      "do": [
+        { "print": { "add": ["do-while j = ", "j"] } },
+        { "let": { "j": { "add": ["j", 1] } } }
+      ],
+      "while": { "lt": ["j", 3] }
+    },
+
+    { "print": "=== Loops done! ===" }
+
+]

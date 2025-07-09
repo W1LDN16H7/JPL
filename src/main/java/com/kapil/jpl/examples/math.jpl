@@ -1,4 +1,11 @@
 [
+    { "bring": "math.jpl" },
+    { "import": "system.jpl" },
+
+  { "print": { "call": { "now": [] } } },
+  { "print": { "call": { "osName": [] } } },
+  { "print": { "call": { "cpuCount": [] } } },
+  { "print": { "mul": ["PI", { "mul": ["radius", "radius"] }] } },
   {"let": {"a": 10}},
   {"let": {"b": 3}},
 

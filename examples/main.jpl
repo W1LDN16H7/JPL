@@ -1,4 +1,0 @@
-[
-  { "bring": "math.jpl" },
-  { "print": { "mul": ["PI", { "mul": ["radius", "radius"] }] } }
-]

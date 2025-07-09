@@ -29,6 +29,25 @@ public class JPLInterpreter {
     }
 
     /**
+     * Loads a JPL file and returns its parsed JSON representation.
+     * This method is used to load JPL files for execution.
+     *
+     * @param s The path to the .jpl file.
+     * @return The parsed JsonNode representing the JPL instructions.
+     */
+    public static JsonNode loadJPLFile(String s) {
+        File file = new File(s);
+        if (!file.exists() || !file.isFile()) {
+            throw new JPLException("File not found: " + s);
+        }
+        try {
+            return new JPLInterpreter().loadCleanJson(file);
+        } catch (IOException e) {
+            throw new JPLException("Failed to load JPL file: " + s + "\n" + e.getMessage());
+        }
+    }
+
+    /**
      * Executes a JPL program from the specified file.
      * Loads, parses, and evaluates the JSON instructions in the file.
      *
