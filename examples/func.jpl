@@ -1,0 +1,24 @@
+[
+  {
+    "def": {
+      "square": {
+        "params": ["x"],
+        "body": [
+          { "return": { "mul": ["x", "x"] } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "greet": {
+        "params": ["name"],
+        "body": [
+          { "print": { "add": ["Hello, ", "name"] } }
+        ]
+      }
+    }
+  },
+  { "print": { "call": { "square": [6] } } },
+  { "call": { "greet": ["Kapil"] } }
+]

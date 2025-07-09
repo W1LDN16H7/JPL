@@ -1,0 +1,48 @@
+[
+  {"let": {"a": 10}},
+  {"let": {"b": 3}},
+
+  // Arithmetic binary operators
+  {"print": {"add": ["a", "b"]}},         // 13.0
+  {"print": {"sub": ["a", "b"]}},         // 7.0
+  {"print": {"mul": ["a", "b"]}},         // 30.0
+  {"print": {"div": ["a", "b"]}},         // 3.3333333333333335
+  {"print": {"mod": ["a", "b"]}},         // 1.0
+  {"print": {"pow": ["a", "b"]}},         // 1000.0
+
+  // String concat with add/+
+  {"print": {"add": ["Hello ", "World"]}}, // Hello World
+  {"print": {"add": ["a", " is number"]}}, // 10 is number
+
+  // Unary arithmetic
+  {"print": {"sqrt": 16}},              // 4.0
+  {"print": {"abs": -5}},               // 5.0
+  {"print": {"neg": 7}},                // -7.0
+
+  // Bitwise operators
+  {"print": {"&": [6, 3]}},               // 2
+  {"print": {"|": [6, 3]}},               // 7
+  {"print": {"^|": [6, 3]}},              // 5
+  {"print": {"~": 6}},                  // -7
+  {"print": {"<<": [2, 3]}},              // 16
+  {"print": {">>": [16, 2]}},             // 4
+  {"print": {">>>": [16, 2]}},            // 4
+
+  // Logical operators
+  {"print": {"eq": ["a", 10]}},           // true
+  {"print": {"==": ["b", 3]}},             // true
+  {"print": {"lt": ["b", "a"]}},           // true
+  {"print": {"<": ["b", "a"]}},            // true
+  {"print": {"lte": ["b", 3]}},            // true
+  {"print": {"<=": ["b", 3]}},             // true
+  {"print": {"gt": ["a", "b"]}},           // true
+  {"print": {">": ["a", "b"]}},             // true
+  {"print": {"gte": ["a", 10]}},           // true
+  {"print": {">=": ["a", 10]}},            // true
+  {"print": {"and": [true, false]}},       // false
+  {"print": {"&&": [true, true]}},         // true
+  {"print": {"or": [false, true]}},        // true
+  {"print": {"||": [false, false]}},       // false
+  {"print": {"not": [false]}},              // true
+  {"print": {"!": [true]}}                  // false
+]

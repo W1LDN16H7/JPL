@@ -6,5 +6,6 @@
   { "print": { "gt": ["x", "y"] } },
   { "print": { "and": [true, { "lt": ["x", "y"] }] } },
   { "print": { "or": [false, { "eq": ["y", 10] }] } },
-  { "print": { "not": [true] } }
+  { "print": { "not": [true] } },
+  {"print":"Hello, World!"}
 ]

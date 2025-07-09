@@ -1,3 +1,7 @@
 
-‰
-java:S6201\"FReplace this instanceof check and cast with 'instanceof Number number'(ÉÖ¸8ÍÈÊÕş2J$c0ea5c07-aa52-4aca-ac87-5b6093933ed5
+–
+java:S1104€"RMake params a static final constant or non-public and provide accessors if needed.(”Í³Ğ8Ü¦îş2J$80c5073b-3dfe-4a22-84ce-2487ed264af1
+“
+java:S1104"PMake body a static final constant or non-public and provide accessors if needed.(üáÙ8Ü¦îş2J$4e93ef5a-6701-441a-8bfd-fe754856c953
+Š
+java:S6201ò"FReplace this instanceof check and cast with 'instanceof Number number'(ÉÖ¸8û—îş2J$af6ab562-8534-4187-86ea-ebb8fdc74059

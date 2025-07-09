@@ -1,7 +1,7 @@
-package com.kapil.jpl;
+package com.kapil.jpl.exceptions;
 
 public class JPLException extends RuntimeException {
     public JPLException(String message) {
-        super(message);
+        super("🛑 JPL Error: " + message);
     }
 }

@@ -1,0 +1,86 @@
+[
+  { "print": "=== SUM of 1 to 10000 ===" },
+  { "let": { "sum": 0 } },
+  {
+    "for": {
+      "var": "i",
+      "from": 1,
+      "to": 10000,
+      "step": 1,
+      "do": [
+        { "let": { "sum": { "add": ["sum", "i"] } } }
+      ]
+    }
+  },
+  { "print": "sum" }, // should print 50005000
+
+  { "print": "=== EVEN NUMBERS from 1 to 100 ===" },
+  {
+    "for": {
+      "var": "i",
+      "from": 1,
+      "to": 100,
+      "step": 1,
+      "do": [
+        {
+          "if": { "eq": [ { "mod": ["i", 2] }, 0 ] },
+          "then": { "print": "i" }
+        }
+      ]
+    }
+  },
+
+  { "print": "=== MULTIPLICATION TABLE (1 to 5) ===" },
+  {
+    "for": {
+      "var": "i",
+      "from": 1,
+      "to": 5,
+      "step": 1,
+      "do": [
+        {
+          "for": {
+            "var": "j",
+            "from": 1,
+            "to": 5,
+            "step": 1,
+            "do": [
+              {
+                "let": { "product": { "mul": ["i", "j"] } }
+              },
+              {
+                "print": {
+                  "add": [
+                    { "add": [ { "add": [ "i", "x" ] }, "j" ] },
+                    " = "
+                  ]
+                }
+              },
+              { "print": "product" }
+            ]
+          }
+        }
+      ]
+    }
+  },
+
+  { "print": "=== COUNTDOWN (do...while) ===" },
+  { "let": { "x": 5 } },
+  {
+    "do": [
+      { "print": "x" },
+      { "let": { "x": { "sub": ["x", 1] } } }
+    ],
+    "while": { "gt": ["x", 0] }
+  },
+
+  { "print": "=== COUNT-UP (while) ===" },
+  { "let": { "n": 1 } },
+  {
+    "while": { "lte": ["n", 5] },
+    "do": [
+      { "print": "n" },
+      { "let": { "n": { "add": ["n", 1] } } }
+    ]
+  }
+]

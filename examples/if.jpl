@@ -1,0 +1,31 @@
+[
+  { "let": { "x": 8 } },
+
+  // Using explicit "condition" key
+  {
+    "if": {
+      "cond": { "lt": ["x", 10] },
+      "then": { "print": "x is less than 10" },
+      "else": { "print": "x is 10 or more" }
+    }
+  },
+
+  // Using shorthand (no "condition" key)
+  {
+    "if": {
+       "cond": {"gt": ["x", 5]},
+      "then": { "print": "x is greater than 5" }
+    }
+  },
+
+  // Another shorthand with else
+  {
+    "if": {
+       "cond": {"eq": ["x", 8]},
+      "then": { "print": "x is exactly 8" },
+      "else": { "print": "x is not 8" }
+    }
+  },
+
+  { "print": "End of if statements" }
+]
