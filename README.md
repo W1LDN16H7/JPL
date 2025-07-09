@@ -47,7 +47,7 @@
 ## 📦 Installation
 
 ### The Easy Way (Windows)
-- Download the latest [JPL.exe](https://github.com/W1LDN16H7/JPL/releases/latest/download/jpl.exe)
+- Download the latest [JPL.exe](https://github.com/W1LDN16H7/JPL/releases/download/v1.0.0/jpl.exe)
 - Double-click it, or run from terminal:
   ```sh
   jpl.exe --help
@@ -71,7 +71,7 @@
 ---
 
 ### Or use the pre-built JAR:
-- Download the latest [JPL.jar](https://github.com/W1LDN16H7/JPL/releases/latest/download/jpl.jar)
+- Download the latest [JPL.jar](https://github.com/W1LDN16H7/JPL/releases/download/v1.0.0/jpl.jar)
 
 ## 🎮 Try it out
 
