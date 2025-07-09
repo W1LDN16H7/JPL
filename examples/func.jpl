@@ -1,24 +1,90 @@
-[
-  {
-    "def": {
-      "square": {
-        "params": ["x"],
-        "body": [
-          { "return": { "mul": ["x", "x"] } }
-        ]
-      }
+[ {
+  "def" : {
+    "square" : {
+      "params" : [ "x" ],
+      "body" : [ {
+        "return" : {
+          "mul" : [ "x", "x" ]
+        }
+      } ]
     }
-  },
-  {
-    "def": {
-      "greet": {
-        "params": ["name"],
-        "body": [
-          { "print": { "add": ["Hello, ", "name"] } }
-        ]
-      }
+  }
+}, {
+  "let" : {
+    "a" : 6
+  }
+}, {
+  "print" : {
+    "call" : {
+      "square" : [ "a" ]
     }
-  },
-  { "print": { "call": { "square": [6] } } },
-  { "call": { "greet": ["Kapil"] } }
-]
+  }
+}, {
+  "def" : {
+    "sum" : {
+      "params" : [ "x", "y" ],
+      "body" : [ {
+        "return" : {
+          "add" : [ "x", "y" ]
+        }
+      } ]
+    }
+  }
+}, {
+  "print" : {
+    "call" : {
+      "sum" : [ 10, 15 ]
+    }
+  }
+}, {
+  "def" : {
+    "double" : {
+      "params" : [ "n" ],
+      "body" : [ {
+        "return" : {
+          "mul" : [ "n", 2 ]
+        }
+      } ]
+    }
+  }
+}, {
+  "def" : {
+    "quadruple" : {
+      "params" : [ "n" ],
+      "body" : [ {
+        "return" : {
+          "call" : {
+            "double" : [ {
+              "call" : {
+                "double" : [ "n" ]
+              }
+            } ]
+          }
+        }
+      } ]
+    }
+  }
+}, {
+  "print" : {
+    "call" : {
+      "quadruple" : [ 5 ]
+    }
+  }
+}, {
+  "def" : {
+    "greet" : {
+      "params" : [ "name" ],
+      "body" : [ {
+        "return" : {
+          "add" : [ "Hello, ", "name" ]
+        }
+      } ]
+    }
+  }
+}, {
+  "print" : {
+    "call" : {
+      "greet" : [ "Kapil" ]
+    }
+  }
+} ]

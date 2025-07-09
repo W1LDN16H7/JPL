@@ -1,4 +1,7 @@
 [
-  { "let": { "PI": 3.14159 } },
-  { "let": { "radius": 10 } }
+  { "import": "system.jpl" },
+
+  { "print": { "call": { "now": [] } } },
+  { "print": { "call": { "osName": [] } } },
+  { "print": { "call": { "cpuCount": [] } } },
 ]

@@ -42,7 +42,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.kapil.jpl.JPLCLI</mainClass>
+                                    <mainClass>com.kapil.jpl.cli.JPLCLI</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

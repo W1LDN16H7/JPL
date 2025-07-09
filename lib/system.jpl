@@ -1,0 +1,173 @@
+[
+  // 🕒 Time
+  {
+    "def": {
+      "now": {
+        "params": [],
+        "body": [
+          { "return": { "native": "java.time.LocalDateTime.now()" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "timestamp": {
+        "params": [],
+        "body": [
+          { "return": { "native": "System.currentTimeMillis()" } }
+        ]
+      }
+    }
+  },
+
+  // 🖥️ OS Info
+  {
+    "def": {
+      "osName": {
+        "params": [],
+        "body": [
+          { "return": { "native": "os.name" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "osArch": {
+        "params": [],
+        "body": [
+          { "return": { "native": "os.arch" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "osVersion": {
+        "params": [],
+        "body": [
+          { "return": { "native": "os.version" } }
+        ]
+      }
+    }
+  },
+
+  // ☕ Java Info
+  {
+    "def": {
+      "javaVersion": {
+        "params": [],
+        "body": [
+          { "return": { "native": "java.version" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "javaVendor": {
+        "params": [],
+        "body": [
+          { "return": { "native": "java.vendor" } }
+        ]
+      }
+    }
+  },
+
+  // 👤 User Info
+  {
+    "def": {
+      "userName": {
+        "params": [],
+        "body": [
+          { "return": { "native": "user.name" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "userHome": {
+        "params": [],
+        "body": [
+          { "return": { "native": "user.home" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "userDir": {
+        "params": [],
+        "body": [
+          { "return": { "native": "user.dir" } }
+        ]
+      }
+    }
+  },
+
+  // 🧠 Runtime
+  {
+    "def": {
+      "cpuCount": {
+        "params": [],
+        "body": [
+          { "return": { "native": "Runtime.availableProcessors" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "maxMemory": {
+        "params": [],
+        "body": [
+          { "return": { "native": "Runtime.maxMemory" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "freeMemory": {
+        "params": [],
+        "body": [
+          { "return": { "native": "Runtime.freeMemory" } }
+        ]
+      }
+    }
+  },
+
+  // 🌱 Environment Variable Access
+  {
+    "def": {
+      "envPath": {
+        "params": [],
+        "body": [
+          { "return": { "native": "env.PATH" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "envUser": {
+        "params": [],
+        "body": [
+          { "return": { "native": "env.USER" } }
+        ]
+      }
+    }
+  },
+  {
+    "def": {
+      "envJavaHome": {
+        "params": [],
+        "body": [
+          { "return": { "native": "env.JAVA_HOME" } }
+        ]
+      }
+    }
+  }
+]

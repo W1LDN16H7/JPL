@@ -1,4 +1,4 @@
-package com.kapil.jpl;
+package com.kapil.jpl.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kapil.jpl.exceptions.JPLException;
@@ -53,6 +53,7 @@ public class JPLContext {
             return node.numberValue();
         } else if (node.isBoolean()) {
             return node.booleanValue();
+
         } else if (node.isNull()) {
             return null;
         } else if (node.isObject()) {

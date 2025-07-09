@@ -1,4 +1,4 @@
-package com.kapil.jpl;
+package com.kapil.jpl.core;
 
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -6,9 +6,10 @@ import com.fasterxml.jackson.core.JsonLocation;
 import com.kapil.jpl.exceptions.BreakException;
 import com.kapil.jpl.exceptions.ContinueException;
 import com.kapil.jpl.exceptions.JPLException;
+import com.kapil.jpl.exceptions.ReturnException;
 
 import java.io.*;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * JPLInterpreter is responsible for executing JPL (JSON Programming Language) scripts.
@@ -16,10 +17,16 @@ import java.util.Iterator;
  * Supports comment removal, error reporting, and context management for script execution.
  */
 public class JPLInterpreter {
+    private final File standardLibDir;
+
 
     private File currentFile;
 
     private final JPLContext context = new JPLContext();
+
+    public JPLInterpreter() {
+        this.standardLibDir = new File("lib"); // or wherever your lib folder is
+    }
 
     /**
      * Executes a JPL program from the specified file.
@@ -67,28 +74,56 @@ public class JPLInterpreter {
      * @throws JPLException If the instruction is unknown or invalid.
      */
     public Object eval(JsonNode node) throws IOException {
+        if (node == null || node.isNull()) return null;
 
 
+        if (node.isTextual()) return context.resolve(node);
+        if (node.isNumber()) return node.numberValue();
+        if (node.isBoolean()) return node.booleanValue();
 
-
+        if (node.has("def")) return evalFunctionDefinition(node.get("def"));
+        if (node.has("call")) return evalFunctionCall(node.get("call"));
+        if (node.has("return")) {
+            Object val = eval(node.get("return")); // recursive eval
+            throw new ReturnException(val);
+        }
+        if (node.has("def")) {
+            return evalFunctionDefinition(node.get("def"));
+        }
+        if (node.has("call")) {
+            return evalFunctionCall(node.get("call"));
+        }
         if (node.has("let")) {
             return context.handleLet(node.get("let"));
         } else if (node.has("const")) {
             return context.handleConst(node.get("const"));
+
+            //import
+
         } else if (node.has("import") || node.has("laao") || node.has("bring")) {
             String path = node.has("import") ? node.get("import").asText()
                     : node.has("laao") ? node.get("laao").asText()
                     : node.get("bring").asText();
 
-            File imported = currentFile != null && currentFile.getParentFile() != null
-                    ? new File(currentFile.getParentFile(), path)
-                    : new File(path);
+            File importedFile;
 
-            if (!imported.exists()) {
-                throw new JPLException("Import failed: file not found → " + imported.getAbsolutePath());
+            // 1. Try relative to current file's directory
+            if (currentFile != null && currentFile.getParentFile() != null) {
+                importedFile = new File(currentFile.getParentFile(), path);
+                if (!importedFile.exists()) {
+                    // 2. fallback to standard lib directory
+                    importedFile = new File(standardLibDir, path);
+                }
+            } else {
+                // no current file context, check standard lib only
+                importedFile = new File(standardLibDir, path);
             }
 
-            execute(imported);
+            if (!importedFile.exists()) {
+                throw new JPLException("Import failed: file not found → " + importedFile.getAbsolutePath());
+            }
+
+            execute(importedFile);
             return null;
         } else if (node.has("if")) {
             return handleIf(node);
@@ -102,7 +137,22 @@ public class JPLInterpreter {
             // do nothing (ignore)
             return null;
         } else if (node.has("print")) {
-            Object value = context.resolve(node.get("print"));
+            JsonNode printNode = node.get("print");
+            if (node.isArray()) {
+                Object lastValue = null;
+                for (JsonNode element : node) {
+                    lastValue = eval(element);
+                }
+                return lastValue;  // returns result of last evaluated statement
+            }
+            Object value;
+            if (printNode.has("call")) {
+                // Delegate to main eval() which handles 'call'
+                value = eval(printNode);
+            } else {
+                value = context.resolve(printNode);
+            }
+
             System.out.println(value);
             return null;
         } else if (node.has("while") && node.has("do")) {
@@ -168,13 +218,13 @@ public class JPLInterpreter {
             return null;
 
         } else {
-            throw new JPLException("Unknown instruction: " + node);
+            try {
+                return context.resolve(node);
+            } catch (Exception e) {
+                throw new JPLException("Unknown instruction: " + node);
+            }
         }
     }
-
-
-
-
 
 
     /**
@@ -240,6 +290,105 @@ public class JPLInterpreter {
 
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readTree(content);
+    }
+
+
+    // fun support
+
+
+    // Container for a function
+    private static class FunctionDef {
+        List<String> params;
+        JsonNode body;
+
+        FunctionDef(List<String> params, JsonNode body) {
+            this.params = params;
+            this.body = body;
+        }
+    }
+
+    // Store functions here: function name -> definition
+    private final Map<String, FunctionDef> functions = new HashMap<>();
+
+    private Object evalFunctionDefinition(JsonNode defNode) {
+        Iterator<String> names = defNode.fieldNames();
+        while (names.hasNext()) {
+            String fnName = names.next();
+            JsonNode fnNode = defNode.get(fnName);
+            List<String> params = new ArrayList<>();
+            for (JsonNode p : fnNode.get("params")) {
+                params.add(p.asText());
+            }
+            JsonNode body = fnNode.get("body");
+            functions.put(fnName, new FunctionDef(params, body));
+        }
+        return null;
+    }
+
+    private Object evalFunctionCall(JsonNode callNode) throws IOException {
+        Iterator<String> names = callNode.fieldNames();
+        if (!names.hasNext()) {
+            throw new JPLException("Function call missing function name");
+        }
+
+        String fnName = names.next();
+
+        FunctionDef fn = functions.get(fnName);
+        if (fn == null) {
+            throw new JPLException("Function not defined: " + fnName);
+        }
+
+        JsonNode argsNode = callNode.get(fnName);
+        if (!argsNode.isArray()) {
+            throw new JPLException("Function call arguments must be an array");
+        }
+
+        if (argsNode.size() != fn.params.size()) {
+            throw new JPLException("Function " + fnName + " expects " + fn.params.size() +
+                    " arguments, got " + argsNode.size());
+        }
+
+        // Save current vars
+        Map<String, Object> oldVars = new HashMap<>(context.getVariables());
+
+        // Bind parameters with evaluated arguments
+        for (int i = 0; i < fn.params.size(); i++) {
+            Object argVal = eval(argsNode.get(i)); // ✅ Now supports expressions
+            context.getVariables().put(fn.params.get(i), argVal);
+        }
+
+        Object retVal = null;
+        try {
+            for (JsonNode stmt : fn.body) {
+                retVal = eval(stmt); // ✅ Will throw ReturnException if needed
+            }
+        } catch (ReturnException re) {
+            retVal = re.getValue();
+        } finally {
+            context.getVariables().clear();
+            context.getVariables().putAll(oldVars);
+        }
+
+        switch (fnName) {
+            case "java_time_now":
+                return java.time.LocalDateTime.now().toString();
+            case "java_os_name":
+                return System.getProperty("os.name");
+            case "java_user_name":
+                return System.getProperty("user.name");
+            case "java_env":
+                if (callNode.size() == 1) {
+                    String key = callNode.get(0).asText();
+                    return System.getenv(key);
+                } else {
+                    throw new JPLException("java_env expects 1 argument");
+                }
+            case null, default:
+                // No special handling for other functions
+                break;
+        }
+
+        return retVal;
     }
 
 

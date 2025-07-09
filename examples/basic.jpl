@@ -1,0 +1,68 @@
+[
+
+  // Define a function to square a number
+  {
+    "def": {
+      "square": {
+        "params": ["x"],
+        "body": [
+          { "return": { "mul": ["x", "x"] } }
+        ]
+      }
+    }
+  },
+    // Define a function to greet a user
+  {
+    "def": {
+      "greet": {
+        "params": ["name"],
+        "body": [
+          { "return": { "add": ["Hello, ", "name"] } }
+        ]
+      }
+    }
+  },
+
+  // Let variables
+  { "let": { "a": 7, "user": "Kapil" } },
+
+  // Print greeting
+  { "print": { "call": { "greet": ["user"] } } },
+
+  // Conditional print
+  {
+    "if": {
+      "cond": { ">": ["a", 5] },
+      "then": { "print": "a is greater than 5" },
+      "else": { "print": "a is 5 or less" }
+    }
+  },
+
+  // Loop with break and continue
+  {
+    "for": {
+      "var": "i",
+      "from": 1,
+      "to": 10,
+      "step": 1,
+      "do": [
+        {
+          "if": {
+            "cond": { "eq": ["i", 3] },
+            "then": { "continue": true }
+          }
+        },
+        {
+          "if": {
+            "cond": { "gt": ["i", 7] },
+            "then": { "break": true }
+          }
+        },
+        { "print": { "call": { "square": ["i"] } } }
+      ]
+    }
+  },
+
+  // End message
+  { "print": "Done!" }
+]

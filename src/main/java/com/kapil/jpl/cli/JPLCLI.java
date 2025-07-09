@@ -1,14 +1,14 @@
-package com.kapil.jpl;
+package com.kapil.jpl.cli;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kapil.jpl.core.JPLInterpreter;
 import picocli.CommandLine;
 import picocli.CommandLine.*;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
-import java.util.concurrent.Callable;
 
 @Command(
         name = "jpl",
