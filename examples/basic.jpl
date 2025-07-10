@@ -68,7 +68,5 @@
       ]
     }
   },
-
-  // End message
   { "print": "Done!" }
 ]

@@ -1,0 +1,22 @@
+[
+
+    { "def": {
+        "greet": {
+          "params": ["name"],
+          "body": [
+            { "return": { "add": ["Hello, ", "name"] } }
+          ]
+        }
+      }
+    },
+    { "let": { "user": "Kapil" } },
+    { "print": { "call": { "greet": ["user"] } } },
+    { "let": { "x": 16 } },
+    { "print": { "sqrt": "x" } },
+    { "print": { "abs": -42 } },
+    { "print": { "pow": ["x", 2] } },
+    { "print": { "mod": [10, 3] } },
+    { "print": { "add": [5, 7] } },
+    { "print": { "sub": [20, 4] } },
+    { "print": { "mul": [3, 8] } }
+]

@@ -18,8 +18,7 @@
       ]
     }
   },
-
-   { "print": "=== WHILE LOOP ===" },
+  { "print": "=== WHILE LOOP ===" },
     { "let": { "i": 0 } },
 
     {
