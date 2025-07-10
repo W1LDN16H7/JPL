@@ -1,4 +1,3 @@
-
 # 💥 JPL - JSON Programming Language
 
 🚀 Welcome to the world’s most ridiculous (and awesome) way to write code in JSON. Yes, you read that right. JSON. As code. Not just for configs or not just for data. But as a ridiculous programming language.
@@ -10,7 +9,7 @@
 > {
 >   "language": "🧠 JPL (JSON as Programming Language) is what happens when you stare at too many curly braces and think, “What if this was a real language?”",
 >   "type": "Fun JSON-Based Programming Language",
->   "status": "🔥 Experimental, Minimal, Geek-Approved",
+>   "status": "🔥 Experimental, Minimal, For geeks",
 >   "features": [
 >     "✅ Pure JSON syntax",
 >     "🧩 Print stuff (yes, really)",
