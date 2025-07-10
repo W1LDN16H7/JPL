@@ -67,6 +67,11 @@
    ```sh
    java -jar target/JPL-1.0-SNAPSHOT.jar
    ```
+4. Build executable with GraalVM (Windows):
+   ```sh
+    .\native-image -cp picocli-4.7.7.jar  -jar jpl.jar
+   ```
+
 
 ---
 
@@ -77,7 +82,7 @@
 
 ### REPL mode (yes, it has a REPL 😱):
 ```sh
-jpl.exe repl
+jpl.exe or java -jar jpl.jar
 ```
 
 ### Run a JPL program:
