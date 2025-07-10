@@ -1,9 +1,0 @@
-
-[// Declare variables
-{ "let": { "x": 3 } },
-/* Do some math */
-{ "let": { "y": 4 } },
-// Output the result
-{ "print": { "add": ["x", "y"] } }
-]
-s
